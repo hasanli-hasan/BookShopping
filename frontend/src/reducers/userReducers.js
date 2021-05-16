@@ -18,7 +18,11 @@ import {
     USER_REGISTER_SUCCESS,
     USER_UPDATE_FAIL,
     USER_UPDATE_REQUEST,
-    USER_UPDATE_SUCCESS
+    USER_UPDATE_SUCCESS,
+    USER_UPDATE_UFA_FAIL,
+    USER_UPDATE_UFA_REQUEST,
+    USER_UPDATE_UFA_RESET,
+    USER_UPDATE_UFA_SUCCESS
 } from '../constants/userConstants'
 
 
@@ -137,3 +141,24 @@ export const userLoginReducer = (state ={}, action) =>{
             return state;
     }
   }
+
+    //update user from admin reducer
+    export const userUpdateFAReducer = (state ={user:{}}, action) =>{
+        switch (action.type) {
+            case USER_UPDATE_UFA_REQUEST:
+                
+               return {loading:true};
+          
+          case USER_UPDATE_UFA_SUCCESS:
+      
+              return {loading:false, success:true};
+          
+          case USER_UPDATE_UFA_FAIL:
+              return {loading:false, error:action.payload}
+              
+              case USER_UPDATE_UFA_RESET:
+                return {user:{}}
+            default:
+                return state;
+        }
+      }
